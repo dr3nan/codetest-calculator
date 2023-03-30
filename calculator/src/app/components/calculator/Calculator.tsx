@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { alert } from '../../utils/globals';
+import './calculator.scss';
 
 type Operator = '+' | '-' | '*' | '/';
 
@@ -8,7 +10,7 @@ const Calculator: React.FC = () => {
 
   const handleNumberInput = (value: string) => {
     setNumberInput(prevInput => prevInput + value);
-  }
+  };
 
   const handleOperator = (operator: Operator) => {
     if (!numberInput) {
@@ -39,16 +41,6 @@ const Calculator: React.FC = () => {
     setResult(0);
     setNumberInput('');
   };
-  // possible functionality
-  // const handleEqual = () => {
-  //   if (!numberInput) {
-  //     alert('Please enter a number');
-  //   } else {
-  //     const number = +numberInput;
-  //     setResult(prevResult => prevResult + number);
-  //     setNumberInput('');
-  //   }
-  // };
 
   const handleDelete = () => {
     setNumberInput(prevInput => prevInput.slice(0, -1));
@@ -59,7 +51,11 @@ const Calculator: React.FC = () => {
       <h1>Calculator</h1>
       <div className='display'>{result}</div>
       <div className='input'>
-        <input type='text' value={numberInput} onChange={() => { }} />
+        <input
+          type='text'
+          value={numberInput}
+          onChange={() => { }}
+        />
       </div>
       <div className='number-buttons'>
         <button onClick={() => handleNumberInput('1')}>1</button>
@@ -72,17 +68,19 @@ const Calculator: React.FC = () => {
         <button onClick={() => handleNumberInput('8')}>8</button>
         <button onClick={() => handleNumberInput('9')}>9</button>
         <button onClick={() => handleNumberInput('0')}>0</button>
+      </div>
+      <div className='operator-buttons'>
+        <button onClick={() => handleOperator('+')}>+</button>
+        <button onClick={() => handleOperator('-')}>-</button>
+        <button onClick={() => handleOperator('*')}>*</button>
+        <button onClick={() => handleOperator('/')}>/</button>
+      </div>
+      <div className='other-buttons'>
+        <button onClick={handleClear}>C</button>
+        <button onClick={handleDelete}>DEL</button>
+      </div>
     </div>
-    <div className='operator-buttons'>
-      <button onClick={() => handleOperator('+')}>+</button>
-      <button onClick={() => handleOperator('-')}>-</button>
-      <button onClick={() => handleOperator('*')}>*</button>
-      <button onClick={() => handleOperator('/')}>/</button>
-    </div>
-    <div className='other-buttons'>
-      <button onClick={handleClear}>C</button>
-      <button onClick={handleDelete}>DEL</button>
-    </div>
-  </div>
   )
 };
+
+export default Calculator;
