@@ -37,6 +37,16 @@ const Calculator: React.FC = () => {
     }
   };
 
+    const handleEqual = () => {
+    if (!numberInput) {
+      // alert('Please enter a number');
+    } else {
+      const number = +numberInput;
+      setResult(prevResult => prevResult + number);
+      setNumberInput('');
+    }
+  };
+
   const handleClear = () => {
     setResult(0);
     setNumberInput('');
@@ -74,6 +84,7 @@ const Calculator: React.FC = () => {
         <button onClick={() => handleOperator('-')}>-</button>
         <button onClick={() => handleOperator('*')}>*</button>
         <button onClick={() => handleOperator('/')}>/</button>
+        <button onClick={handleEqual}>=</button>
       </div>
       <div className='other-buttons'>
         <button onClick={handleClear}>C</button>
