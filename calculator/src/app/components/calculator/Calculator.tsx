@@ -68,7 +68,7 @@ const Calculator: React.FC = () => {
     <div className='calculator'>
       {/* <h1>Calculator</h1> */}
       <div className='display-input-wrapper'>
-        <div className='display'>{result}</div>
+        <div className='display'>{result ? result : ''}</div>
         <input
           type='number'
           className='number-input'
