@@ -60,33 +60,41 @@ const Calculator: React.FC = () => {
   // and use the event.key to determine which button was pressed
   // and then call the appropriate function
 
+  const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
+    event.target.value = '';
+  };
+
   return (
     <div className='calculator'>
-      <h1>Calculator</h1>
-      <div className='display'>{result}</div>
-      <div className='input'>
+      <div className='display-input-wrapper'>
+        <div className='display'>{result ? result : ''}</div>
         <input
-          type='text'
+          type='number'
+          className='number-input'
           value={numberInput}
           onChange={(event) => setNumberInput(Number(event.target.value))}
           onKeyDown={(event) => {
             if (event.key === 'Enter') {
               handleEqual();
+            } else if (event.key === 'Backspace') {
+              handleDelete();
             }
           }}
+          maxLength={10}
+          onFocus={handleFocus}
         />
       </div>
+      <div className='clear-delete-buttons'>
+        <button onClick={handleClear}>AC</button>
+        <button onClick={handleDelete}>DEL</button>
+      </div>
       <div className='number-buttons'>
-        <button onClick={() => handleNumberInput(1)}>1</button>
-        <button onClick={() => handleNumberInput(2)}>2</button>
-        <button onClick={() => handleNumberInput(3)}>3</button>
-        <button onClick={() => handleNumberInput(4)}>4</button>
-        <button onClick={() => handleNumberInput(5)}>5</button>
-        <button onClick={() => handleNumberInput(6)}>6</button>
-        <button onClick={() => handleNumberInput(7)}>7</button>
-        <button onClick={() => handleNumberInput(8)}>8</button>
-        <button onClick={() => handleNumberInput(9)}>9</button>
-        <button onClick={() => handleNumberInput(0)}>0</button>
+        {Array.from({ length: 9 }, (_, i: number) => (
+          <button onClick={() => handleNumberInput(9 - i)}>{9 - i}</button>
+        ))}
+        <button className='zero-button' onClick={() => handleNumberInput(0)}>
+          0
+        </button>
       </div>
       <div className='operator-buttons'>
         <button onClick={() => handleOperator('+')}>+</button>
@@ -94,10 +102,6 @@ const Calculator: React.FC = () => {
         <button onClick={() => handleOperator('*')}>*</button>
         <button onClick={() => handleOperator('/')}>/</button>
         <button onClick={handleEqual}>=</button>
-      </div>
-      <div className='other-buttons'>
-        <button onClick={handleClear}>C</button>
-        <button onClick={handleDelete}>DEL</button>
       </div>
     </div>
   )
