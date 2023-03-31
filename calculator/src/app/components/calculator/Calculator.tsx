@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
+import { Operator } from '../../types/types';
 import './Calculator.scss';
-
-type Operator = '+' | '-' | '*' | '/';
 
 const Calculator: React.FC = () => {
   const [result, setResult] = useState<number>(0);
@@ -94,5 +93,3 @@ const Calculator: React.FC = () => {
 };
 
 export default Calculator;
-
-
