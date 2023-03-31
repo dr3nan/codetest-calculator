@@ -66,7 +66,6 @@ const Calculator: React.FC = () => {
 
   return (
     <div className='calculator'>
-      {/* <h1>Calculator</h1> */}
       <div className='display-input-wrapper'>
         <div className='display'>{result ? result : ''}</div>
         <input
@@ -86,7 +85,7 @@ const Calculator: React.FC = () => {
         />
       </div>
       <div className='clear-delete-buttons'>
-        <button onClick={handleClear}>C</button>
+        <button onClick={handleClear}>AC</button>
         <button onClick={handleDelete}>DEL</button>
       </div>
       <div className='number-buttons'>
