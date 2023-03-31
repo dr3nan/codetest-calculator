@@ -73,11 +73,16 @@
 
   .clear-delete-buttons button {
     height: 40px;
-    width: 66px;
+    width: 65px;
     cursor: pointer;
     border: none;
     background-color: #f17680;
     color: #fff;
+  }
+
+  .clear-delete-buttons button:hover {
+    background-color: #ed8991;
+    transition: 0.2s;
   }
 
   .number-buttons {
@@ -102,6 +107,7 @@
   }
 
   .number-buttons button:active {
+    color: #000000b2;
     border: 1px solid #cccccc7c;
   }
 
@@ -122,6 +128,11 @@
     background-color: #eeb395;
   }
 
+  .operator-buttons button:hover {
+    background-color: #f3bda2;
+    transition: 0.2s;
+  }
+
   .operator-buttons button:nth-child(3) {
     padding-top: 10px;
   }
@@ -129,5 +140,10 @@
   .operator-buttons button:nth-child(5) {
     background-color: #315c7f;
     color: #fff;
+  }
+
+  .operator-buttons button:nth-child(5):hover {
+    background-color: #1c5177;
+    transition: 0.2s;
   }
 }
