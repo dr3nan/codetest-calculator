@@ -62,7 +62,12 @@ const Calculator: React.FC = () => {
         <input
           type='text'
           value={numberInput}
-          onChange={() => { }}
+          onChange={(event) => setNumberInput(event.target.value)}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter') {
+              handleEqual();
+            }
+          }}
         />
       </div>
       <div className='number-buttons'>
