@@ -1,0 +1,11 @@
+.app {
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(#325a7c, #c06c87);
+  min-height: 450px;
+  min-width: 200px;
+}

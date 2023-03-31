@@ -60,20 +60,27 @@ const Calculator: React.FC = () => {
   // and use the event.key to determine which button was pressed
   // and then call the appropriate function
 
+  const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
+    event.target.value = '';
+  };
+
   return (
     <div className='calculator'>
       <h1>Calculator</h1>
       <div className='display'>{result}</div>
       <div className='input'>
         <input
-          type='text'
+          type='number'
           value={numberInput}
           onChange={(event) => setNumberInput(Number(event.target.value))}
           onKeyDown={(event) => {
             if (event.key === 'Enter') {
               handleEqual();
+            } else if (event.key === 'Backspace') {
+              handleDelete();
             }
           }}
+          onFocus={handleFocus}
         />
       </div>
       <div className='number-buttons'>
