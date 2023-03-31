@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Operator } from '../../types/types';
-import './Calculator.scss';
+import './calculator.scss';
 
 const Calculator: React.FC = () => {
   const [result, setResult] = useState<number>(0);
