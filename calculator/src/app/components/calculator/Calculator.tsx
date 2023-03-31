@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-// import { alert } from '../../utils/globals';
-// import './Calculator.scss';
+import './Calculator.scss';
 
 type Operator = '+' | '-' | '*' | '/';
 
@@ -14,7 +13,7 @@ const Calculator: React.FC = () => {
 
   const handleOperator = (operator: Operator) => {
     if (!numberInput) {
-      // alert('Please enter a number');
+      alert('Please enter a number');
     } else {
       const number = +numberInput;
       switch (operator) {
@@ -37,9 +36,9 @@ const Calculator: React.FC = () => {
     }
   };
 
-    const handleEqual = () => {
+  const handleEqual = () => {
     if (!numberInput) {
-      // alert('Please enter a number');
+      alert('Please enter a number');
     } else {
       const number = +numberInput;
       setResult(prevResult => prevResult + number);
@@ -95,3 +94,5 @@ const Calculator: React.FC = () => {
 };
 
 export default Calculator;
+
+
