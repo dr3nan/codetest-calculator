@@ -85,14 +85,17 @@ const Calculator: React.FC = () => {
           onFocus={handleFocus}
         />
       </div>
-      <div className='other-buttons'>
+      <div className='clear-delete-buttons'>
         <button onClick={handleClear}>C</button>
         <button onClick={handleDelete}>DEL</button>
       </div>
       <div className='number-buttons'>
-        {Array.from({ length: 10 }, (_, i: number) => (
+        {Array.from({ length: 9 }, (_, i: number) => (
           <button onClick={() => handleNumberInput(9 - i)}>{9 - i}</button>
         ))}
+        <button className='zero-button' onClick={() => handleNumberInput(0)}>
+          0
+        </button>
       </div>
       <div className='operator-buttons'>
         <button onClick={() => handleOperator('+')}>+</button>
