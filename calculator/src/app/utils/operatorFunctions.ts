@@ -5,8 +5,6 @@ const handleOperatorSimpleCalc = (
   operator: Operator,
   state: { result: number, input: number }
 ) => {
-  console.log('operator: =====>', operator);
-
   const { result, input } = state;
   switch (operator) {
     case '+':
@@ -22,5 +20,4 @@ const handleOperatorSimpleCalc = (
   }
 };
 // in case we would need to export more functions, we could use named exports
-// export { handleOperatorSimpleCalc, handleOperatorAdvancedCalc };
 export default handleOperatorSimpleCalc;
