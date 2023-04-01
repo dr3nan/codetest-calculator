@@ -8,28 +8,28 @@ const Calculator: React.FC = () => {
 
   const handleNumberInput = (value: number) => {
     if (numberInput.toString().length > 9) {
-      alert('The number is too long');
+      alert('The number is too long (max 10 digits)');
     } else {
       setNumberInput(prevInput => prevInput * 10 + value);
     }
   };
 
-  const handleOperator = (operator: Operator) => {
-    if (!numberInput) {
+  const handleOperator = (operator: Operator, input: number) => {
+    if (isNaN(input)) {
       alert('Please enter a number');
     } else {
       switch (operator) {
         case '+':
-          setResult(prevResult => prevResult + numberInput);
+          setResult(prevResult => prevResult + input);
           break;
         case '-':
-          setResult(prevResult => prevResult - numberInput);
+          setResult(prevResult => prevResult - input);
           break;
         case '*':
-          setResult(prevResult => prevResult * numberInput);
+          setResult(prevResult => prevResult * input);
           break;
         case '/':
-          setResult(prevResult => prevResult / numberInput);
+          setResult(prevResult => prevResult / input);
           break;
         default:
           break;
@@ -39,7 +39,7 @@ const Calculator: React.FC = () => {
   };
 
   const handleEqual = () => {
-    if (!numberInput) {
+    if (isNaN(numberInput)) {
       alert('Please enter a number');
     } else {
       setResult(prevResult => prevResult + numberInput);
@@ -57,9 +57,10 @@ const Calculator: React.FC = () => {
   };
 
   // here we could add another event handler for the keyboard input
-  // and use the event.key to determine which button was pressed
-  // and then call the appropriate function
+  // and use the event.key to determine which button was pressed,
+  // then call the appropriate function
 
+  // this is a workaround for the input field to be cleared when it is focused
   const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
     event.target.value = '';
   };
@@ -85,7 +86,7 @@ const Calculator: React.FC = () => {
         />
       </div>
       <div className='clear-delete-buttons'>
-        <button onClick={handleClear}>AC</button>
+        <button className='button' onClick={handleClear}>AC</button>
         <button onClick={handleDelete}>DEL</button>
       </div>
       <div className='number-buttons'>
@@ -97,10 +98,10 @@ const Calculator: React.FC = () => {
         </button>
       </div>
       <div className='operator-buttons'>
-        <button onClick={() => handleOperator('+')}>+</button>
-        <button onClick={() => handleOperator('-')}>-</button>
-        <button onClick={() => handleOperator('*')}>*</button>
-        <button onClick={() => handleOperator('/')}>/</button>
+        <button onClick={() => handleOperator('+', numberInput)}>+</button>
+        <button onClick={() => handleOperator('-', numberInput)}>-</button>
+        <button onClick={() => handleOperator('*', numberInput)}>*</button>
+        <button onClick={() => handleOperator('/', numberInput)}>/</button>
         <button onClick={handleEqual}>=</button>
       </div>
     </div>

@@ -32,7 +32,8 @@
     font-size: 1.7rem;
     margin-bottom: 20px;
     box-sizing: border-box;
-    padding: 8px;
+    padding: 10px 16px;
+    letter-spacing: 2px;
 
     input[type='number']::-webkit-inner-spin-button,
     input[type='number']::-webkit-outer-spin-button {
@@ -46,7 +47,7 @@
 
     .display {
       width: 100%;
-      letter-spacing: 2px;
+      // letter-spacing: 2px;
       display: flex;
       align-items: center;
       justify-content: flex-end;
