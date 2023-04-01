@@ -21,7 +21,7 @@ const Calculator: React.FC = () => {
         if (prevCurr === null) return null;
         return prevCurr * 10 + value;
       });
-    }
+    };
   };
 
   const handleOperation = (operator: Operator) => {
@@ -37,7 +37,7 @@ const Calculator: React.FC = () => {
         handleOperatorSimpleCalc(forOperator, { result: previousValue, input: currentValue })
       );
       setCurrentValue(null);
-    }
+    };
   };
 
   const handleClear = () => {
