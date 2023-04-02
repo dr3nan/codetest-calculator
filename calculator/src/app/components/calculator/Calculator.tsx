@@ -41,7 +41,7 @@ const Calculator: React.FC = () => {
   };
 
   const handleClear = () => {
-    if (currentValue === 0) {
+    if (!currentValue) {
       setPreviousValue(0);
       setCurrentValue(0);
     } else {
@@ -85,22 +85,19 @@ const Calculator: React.FC = () => {
       </div>
       <div className='clear-delete-buttons'>
         <button className='button' onClick={handleClear}>AC</button>
-        <button onClick={handleDelete}>DEL</button>
+        <button className='button' onClick={handleDelete}>DEL</button>
       </div>
       <div className='number-buttons'>
-        {Array.from({ length: 9 }, (_, i: number) => (
+        {Array.from({ length: 10 }, (_, i: number) => (
           <button key={i} onClick={() => handleNumberInput(9 - i)}>{9 - i}</button>
         ))}
-        <button className='zero-button' onClick={() => handleNumberInput(0)}>
-          0
-        </button>
       </div>
       <div className='operator-buttons'>
-        <button onClick={() => handleOperation('+')}>+</button>
-        <button onClick={() => handleOperation('-')}>-</button>
-        <button onClick={() => handleOperation('*')}>*</button>
-        <button onClick={() => handleOperation('/')}>/</button>
-        <button onClick={handleEqual}>=</button>
+        <button className='button' onClick={() => handleOperation('+')}>+</button>
+        <button className='button' onClick={() => handleOperation('-')}>-</button>
+        <button className='button' onClick={() => handleOperation('*')}>*</button>
+        <button className='button' onClick={() => handleOperation('/')}>/</button>
+        <button className='button' onClick={handleEqual}>=</button>
       </div>
     </div>
   )

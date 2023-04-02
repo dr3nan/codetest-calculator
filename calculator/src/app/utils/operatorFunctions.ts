@@ -1,6 +1,9 @@
 import { Operator } from '../types/types';
 import { add, subtract, multiply, divide } from './math';
 
+// this file could host a variety of functions, this would make our code modular and scalable
+// For now we only need one
+
 const handleOperatorSimpleCalc = (
   operator: Operator,
   state: { result: number, input: number }
