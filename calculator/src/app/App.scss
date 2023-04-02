@@ -1,3 +1,5 @@
+@use '../scss/variables.scss' as v;
+
 .app {
   display: flex;
   flex-direction: column;
@@ -5,7 +7,7 @@
   justify-content: center;
   height: 100vh;
   width: 100vw;
-  background: linear-gradient(#325a7c, #c06c87);
+  background: v.$color-gradient-background;
   min-height: 450px;
   min-width: 200px;
 }
