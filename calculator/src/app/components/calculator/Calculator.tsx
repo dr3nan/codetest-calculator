@@ -1,78 +1,75 @@
 import React, { useState } from 'react';
 import { Operator } from '../../types/types';
+import handleOperatorSimpleCalc from '../../utils/operatorFunctions';
 import './calculator.scss';
 
 const Calculator: React.FC = () => {
-  const [result, setResult] = useState<number>(0);
-  const [numberInput, setNumberInput] = useState<number>(0);
+  const [previousValue, setPreviousValue] = useState<number | null>(null);
+  const [currentValue, setCurrentValue] = useState<number | null>(null);
+  const [forOperator, setForOperator] = useState<Operator | null>(null);
 
   const handleNumberInput = (value: number) => {
-    if (numberInput.toString().length > 9) {
-      alert('The number is too long');
+    console.log({ value, currentValue });
+    if (currentValue === null) return setCurrentValue(value);
+
+    if (currentValue.toString().length > 9) {
+      alert('The number is too long (max 10 digits)');
+    } else if (isNaN(value)) {
+      alert('Please type in a number');
     } else {
-      setNumberInput(prevInput => prevInput * 10 + value);
-    }
+      setCurrentValue((prevCurr) => {
+        if (prevCurr === null) return null;
+        return prevCurr * 10 + value;
+      });
+    };
   };
 
-  const handleOperator = (operator: Operator) => {
-    if (!numberInput) {
-      alert('Please enter a number');
-    } else {
-      switch (operator) {
-        case '+':
-          setResult(prevResult => prevResult + numberInput);
-          break;
-        case '-':
-          setResult(prevResult => prevResult - numberInput);
-          break;
-        case '*':
-          setResult(prevResult => prevResult * numberInput);
-          break;
-        case '/':
-          setResult(prevResult => prevResult / numberInput);
-          break;
-        default:
-          break;
-      }
-      setNumberInput(0);
-    }
+  const handleOperation = (operator: Operator) => {
+    setPreviousValue(currentValue);
+    setForOperator(operator);
+    setCurrentValue(0);
   };
 
   const handleEqual = () => {
-    if (!numberInput) {
-      alert('Please enter a number');
-    } else {
-      setResult(prevResult => prevResult + numberInput);
-      setNumberInput(0);
-    }
+    if (!forOperator) return alert('No operator was selected');
+    if (previousValue !== null && currentValue !== null) {
+      setPreviousValue(
+        handleOperatorSimpleCalc(forOperator, { result: previousValue, input: currentValue })
+      );
+      setCurrentValue(null);
+    };
   };
 
   const handleClear = () => {
-    setResult(0);
-    setNumberInput(0);
+    if (!currentValue) {
+      setPreviousValue(0);
+      setCurrentValue(0);
+    } else {
+      setCurrentValue(0);
+    }
   };
 
   const handleDelete = () => {
-    setNumberInput(prevInput => Math.floor(prevInput / 10));
+    setCurrentValue((prevCurr) => {
+      if (prevCurr === null) return null;
+      return Number(prevCurr.toString().slice(0, -1))
+    });
   };
 
   // here we could add another event handler for the keyboard input
-  // and use the event.key to determine which button was pressed
-  // and then call the appropriate function
-
-  const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
-    event.target.value = '';
-  };
+  // and use the event.key to determine which button was pressed,
+  // then call the appropriate function
 
   return (
     <div className='calculator'>
       <div className='display-input-wrapper'>
-        <div className='display'>{result ? result : ''}</div>
+        <div className='display'>{previousValue}</div>
         <input
           type='number'
           className='number-input'
-          value={numberInput}
-          onChange={(event) => setNumberInput(Number(event.target.value))}
+          placeholder='0'
+          value={currentValue ?? 0}
+          onChange={(event) => setPreviousValue(Number(event.target.value))}
           onKeyDown={(event) => {
             if (event.key === 'Enter') {
               handleEqual();
@@ -81,27 +78,26 @@ const Calculator: React.FC = () => {
             }
           }}
           maxLength={10}
-          onFocus={handleFocus}
+          onFocus={(event) => {
+            event.target.value = '';
+          }}
         />
       </div>
       <div className='clear-delete-buttons'>
-        <button onClick={handleClear}>AC</button>
-        <button onClick={handleDelete}>DEL</button>
+        <button className='button' onClick={handleClear}>AC</button>
+        <button className='button' onClick={handleDelete}>DEL</button>
       </div>
       <div className='number-buttons'>
-        {Array.from({ length: 9 }, (_, i: number) => (
-          <button onClick={() => handleNumberInput(9 - i)}>{9 - i}</button>
+        {Array.from({ length: 10 }, (_, i: number) => (
+          <button key={i} onClick={() => handleNumberInput(9 - i)}>{9 - i}</button>
         ))}
-        <button className='zero-button' onClick={() => handleNumberInput(0)}>
-          0
-        </button>
       </div>
       <div className='operator-buttons'>
-        <button onClick={() => handleOperator('+')}>+</button>
-        <button onClick={() => handleOperator('-')}>-</button>
-        <button onClick={() => handleOperator('*')}>*</button>
-        <button onClick={() => handleOperator('/')}>/</button>
-        <button onClick={handleEqual}>=</button>
+        <button className='button' onClick={() => handleOperation('+')}>+</button>
+        <button className='button' onClick={() => handleOperation('-')}>-</button>
+        <button className='button' onClick={() => handleOperation('*')}>*</button>
+        <button className='button' onClick={() => handleOperation('/')}>/</button>
+        <button className='button' onClick={handleEqual}>=</button>
       </div>
     </div>
   )

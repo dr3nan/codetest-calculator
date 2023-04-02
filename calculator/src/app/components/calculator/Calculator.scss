@@ -1,7 +1,8 @@
+@use '../../../scss/variables' as v;
 @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;1,500&display=swap');
 
 .calculator {
-  border: 1px solid #ccc;
+  border: none;
   padding: 38px;
   width: 350px;
   height: 403px;
@@ -11,20 +12,14 @@
   grid-column-gap: 5px;
   grid-row-gap: 5px;
   align-items: center;
-  background-color: #ffffff;
+  background-color: v.$color-main-white;
   box-sizing: border-box;
-
-  button {
-    font-size: 1.2rem;
-    font-family: 'Rubik', sans-serif;
-  }
 
   .display-input-wrapper {
     grid-area: 1 / 1 / 2 / 4;
     width: 100%;
     height: 86px;
-    background-color: #fff;
-    border: 1px solid #cccccc7c;
+    border: 1px solid v.$color-border-light;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -32,7 +27,8 @@
     font-size: 1.7rem;
     margin-bottom: 20px;
     box-sizing: border-box;
-    padding: 8px;
+    padding: 10px 16px;
+    letter-spacing: 2px;
 
     input[type='number']::-webkit-inner-spin-button,
     input[type='number']::-webkit-outer-spin-button {
@@ -46,7 +42,6 @@
 
     .display {
       width: 100%;
-      letter-spacing: 2px;
       display: flex;
       align-items: center;
       justify-content: flex-end;
@@ -69,20 +64,22 @@
     grid-area: 2 / 1 / 3 / 3;
     display: flex;
     gap: 5px;
-  }
 
-  .clear-delete-buttons button {
-    height: 40px;
-    width: 65px;
-    cursor: pointer;
-    border: none;
-    background-color: #f17680;
-    color: #fff;
-  }
+    & button {
+      font-size: 1.2rem;
+      font-family: 'Rubik', sans-serif;
+      height: 40px;
+      width: 65px;
+      cursor: pointer;
+      border: none;
+      background-color: v.$color-salmon-button;
+      color: v.$color-main-white;
+    }
 
-  .clear-delete-buttons button:hover {
-    background-color: #ed8991;
-    transition: 0.2s;
+    & :hover {
+      background-color: v.$color-salmon-button-hover;
+      transition: 0.2s;
+    }
   }
 
   .number-buttons {
@@ -92,23 +89,25 @@
     grid-template-rows: repeat(3, 1fr);
     grid-column-gap: 5px;
     grid-row-gap: 5px;
-  }
 
-  .zero-button {
-    grid-row: 4 / 5;
-    grid-column: 2 / 3;
-  }
+    & button {
+      font-size: 1.2rem;
+      font-family: 'Rubik', sans-serif;
+      height: 40px;
+      cursor: pointer;
+      border: none;
+      background-color: transparent;
+    }
 
-  .number-buttons button {
-    height: 40px;
-    cursor: pointer;
-    border: none;
-    background-color: transparent;
-  }
+    & :nth-child(10) {
+      grid-row: 4 / 5;
+      grid-column: 2 / 3;
+    }
 
-  .number-buttons button:active {
-    color: #000000b2;
-    border: 1px solid #cccccc7c;
+    & :active {
+      color: #000000b2;
+      border: 1px solid v.$color-border-light;
+    }
   }
 
   .operator-buttons {
@@ -116,34 +115,36 @@
     display: flex;
     gap: 5px;
     flex-direction: column;
-  }
 
-  .operator-buttons button {
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    border: none;
-    background-color: #eeb395;
-  }
+    & button {
+      font-size: 1.2rem;
+      font-family: 'Rubik', sans-serif;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: none;
+      background-color: v.$color-tangerine-button;
+    }
 
-  .operator-buttons button:hover {
-    background-color: #f3bda2;
-    transition: 0.2s;
-  }
+    & :hover {
+      background-color: v.$color-tangerine-button-hover;
+      transition: 0.2s;
+    }
 
-  .operator-buttons button:nth-child(3) {
-    padding-top: 10px;
-  }
+    & :nth-child(3) {
+      padding-top: 10px;
+    }
 
-  .operator-buttons button:nth-child(5) {
-    background-color: #315c7f;
-    color: #fff;
-  }
+    & :nth-child(5) {
+      background-color: v.$color-blue-marine-button;
+      color: v.$color-main-white;
+    }
 
-  .operator-buttons button:nth-child(5):hover {
-    background-color: #1c5177;
-    transition: 0.2s;
+    & :nth-child(5):hover {
+      background-color: v.$color-blue-marine-button-hover;
+      transition: 0.2s;
+    }
   }
 }
